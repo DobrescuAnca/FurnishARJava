@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">FurnishAR</string>
+    <string name="camera_permission_grant">Camera permission needs to be granted</string>
+    <string name="camera_permission">Camera permission needed</string>
 </resources>

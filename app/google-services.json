@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "370681512739",
+    "firebase_url": "https://furnishar.firebaseio.com",
+    "project_id": "furnishar",
+    "storage_bucket": "furnishar.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:370681512739:android:c644d3d277ed8369",
+        "android_client_info": {
+          "package_name": "com.example.furnishar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "370681512739-3spqdmcmoi3nspng1d5nm1686ob395bc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.furnishar",
+            "certificate_hash": "6a2323110e3cc8896dcf093747885160739b17c6"
+          }
+        },
+        {
+          "client_id": "370681512739-3omocv9jkiqig0fdcfn9g77epihk76pu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBAmaw_p-SR9rKSDChaRyrODu4NEe8-BR8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "370681512739-3omocv9jkiqig0fdcfn9g77epihk76pu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

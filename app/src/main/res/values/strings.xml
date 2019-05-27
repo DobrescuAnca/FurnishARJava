@@ -1,5 +1,14 @@
 <resources>
+
     <string name="app_name">FurnishAR</string>
+
     <string name="camera_permission_grant">Camera permission needs to be granted</string>
     <string name="camera_permission">Camera permission needed</string>
+
+    <string name="sign_in_with_facebook">Sign in with Facebook</string>
+    <string name="facebook_app_id">2114304628666682</string>
+    <string name="fb_login_protocol_scheme">fb2114304628666682</string>
+
+    <string name="sign_in_with_google">Sign in with Google</string>
+    <string name="login_failed">Login Failed</string>
 </resources>

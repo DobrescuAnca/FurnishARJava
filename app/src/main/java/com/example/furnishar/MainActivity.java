@@ -5,17 +5,16 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.provider.Settings;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.widget.Toast;
-import android.support.design.widget.Snackbar;
+import com.google.android.material.snackbar.Snackbar;
 
 import com.example.furnishar.adapters.PhotosAdapter;
 
@@ -28,9 +27,6 @@ import butterknife.OnClick;
 public class MainActivity extends AppCompatActivity {
 
     private static final int MY_CAMERA_REQUEST_CODE = 100;
-
-    @BindView(R.id.photos_swiperefresh)
-    SwipeRefreshLayout swipeRefreshLayout;
 
     @BindView(R.id.photos_recyclerview)
     RecyclerView photosRecyclerView;
@@ -54,10 +50,10 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         photosRecyclerView.setLayoutManager(layoutManager);
 
-        swipeRefreshLayout.setOnRefreshListener(() -> {
-            photosAdapter.updatePhotoList(photoList);
-            swipeRefreshLayout.setRefreshing(false);
-        });
+//        swipeRefreshLayout.setOnRefreshListener(() -> {
+//            photosAdapter.updatePhotoList(photoList);
+//            swipeRefreshLayout.setRefreshing(false);
+//        });
     }
 
     @OnClick(R.id.camera_btn)

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="40dp">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:text="@string/app_name"
+        android:gravity="center_vertical"
+        android:textAlignment="center"
+        android:textSize="34sp"
+        />
+
+    <LinearLayout
+        android:id="@+id/login_buttons_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="60dp"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/login_facebooklogin"
+            android:layout_width="@dimen/login_button_width"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:background="@mipmap/background_facebook_login">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="80dp"
+                android:text="@string/sign_in_with_facebook"
+                android:textColor="@color/whiteColor"
+                android:textSize="17sp" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/login_googlelogin"
+            android:layout_width="@dimen/login_button_width"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/background_google_login">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="80dp"
+                android:text="@string/sign_in_with_google"
+                android:textColor="@color/lightGreyColor"
+                android:textSize="17sp" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</RelativeLayout>

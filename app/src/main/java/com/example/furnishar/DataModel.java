@@ -1,9 +1,5 @@
 package com.example.furnishar;
 
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.widget.ImageView;
-
 import androidx.annotation.NonNull;
 
 import com.example.furnishar.models.User;
@@ -12,18 +8,15 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
-import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 public class DataModel  {
 
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference userDatabase = database.getReference().child("users");
-
-    private FirebaseStorage storage = FirebaseStorage.getInstance();
-    private StorageReference photoStorage = storage.getReference();
 
     private static DataModel instance = null;
 
@@ -33,8 +26,9 @@ public class DataModel  {
         return instance;
     }
 
-    public boolean verifyUser(String email) {
-        final boolean[] emailExists = new boolean[1];
+    public String verifyUser(String email) {
+        final String[] userId = new String[1];
+        userId[0] = null;
 
         if(userDatabase != null) {
             userDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -42,7 +36,7 @@ public class DataModel  {
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     for(DataSnapshot userDetails : dataSnapshot.getChildren()) {
                         if(userDetails.child("email").getValue() == email) {
-                            emailExists[0] = true;
+                            userId[0] = userDetails.getKey();
                             break;
                         }
                     }
@@ -55,29 +49,36 @@ public class DataModel  {
             });
         }
 
-        return emailExists[0];
+        return userId[0];
     }
 
     public void addUser(String userId, String firstName, String email) {
         User user = new User(firstName, email);
-
-        //TODO change first name to smth more reliable => some key to be saved in shared preferences so it can be used when saving photos
-        userDatabase.child(firstName).setValue(user);
+        userDatabase.child(userId).setValue(user);
     }
 
-    public void addPhoto(String userId, String photoNamee){
-        StorageReference imagesRef = photoStorage.child(userId);
-
+    public void addPhoto(String userId, String photoName, String photoEncoded){
+        userDatabase.child(userId).child("Photos").child(photoName).setValue(photoEncoded);
     }
 
-    private byte[] converteImageToByte(ImageView img) {
-        img.setDrawingCacheEnabled(true);
-        img.buildDrawingCache();
-        Bitmap bitmap = ((BitmapDrawable) img.getDrawable()).getBitmap();
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+    public List<String> getPhotoList(String userId) {
+        List<String> photoList = new ArrayList<>();
 
-        return baos.toByteArray();
+        userDatabase.child(userId).child("Photos").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot photo : dataSnapshot.getChildren()) {
+                    photoList.add(Objects.requireNonNull(photo.getValue()).toString());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        return photoList;
     }
 
 }

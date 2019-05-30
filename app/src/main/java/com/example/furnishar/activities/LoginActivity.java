@@ -1,4 +1,4 @@
-package com.example.furnishar;
+package com.example.furnishar.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,9 @@ import android.util.Log;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.example.furnishar.DataModel;
+import com.example.furnishar.R;
+import com.example.furnishar.SessionManager;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -32,7 +35,8 @@ import butterknife.OnClick;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private static final String EMAIL = "email";
+    private static final String EMAIL = "ema" +
+            "il";
     private static final int GOOGLE_SIGN_IN_REQUEST = 1123;
 
     private CallbackManager facebookCallbackManager;
@@ -139,8 +143,13 @@ public class LoginActivity extends AppCompatActivity {
 
     private void sendLoginRequest(String accountId, String email, String firstName, String lastName) {
         Toast.makeText(this, "email: "+ email, Toast.LENGTH_LONG).show();
-        if(!DataModel.getInstance().verifyUser(email))
-            DataModel.getInstance().addUser(firstName, email);
+
+        String userId = DataModel.getInstance().verifyUser(email);
+        if(userId == null) {
+            userId = generateUserId();
+            DataModel.getInstance().addUser(userId, firstName, email);
+        }
+        SessionManager.getInstance(this).setUserID(userId);
         gotoMainActivity();
     }
 
@@ -169,6 +178,10 @@ public class LoginActivity extends AppCompatActivity {
     public void gotoMainActivity(){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+    }
+
+    private String generateUserId(){
+        return "Dobrescu";
     }
 
 }
